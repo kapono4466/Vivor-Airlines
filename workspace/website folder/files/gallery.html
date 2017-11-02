@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	  <title>The image gallery</title>
+    </head>
+  <style>
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600);	
+
+html {
+  border-top: 5px solid #fff;
+  height: 100%;
+  color: #2a2a2a;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans';
+  height: 100%;
+
+background-image: -ms-linear-gradient(top left, #FFFFFF 0%, #00A3EF 100%);
+
+background-image: -moz-linear-gradient(top left, #FFFFFF 0%, #00A3EF 100%);
+
+background-image: -o-linear-gradient(top left, #FFFFFF 0%, #00A3EF 100%);
+background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #FFFFFF), color-stop(1, #00A3EF));
+background-image: -webkit-linear-gradient(top left, #FFFFFF 0%, #00A3EF 100%);
+background-image: linear-gradient(to bottom right, #FFFFFF 0%, #00A3EF 100%);
+}
+
+h1 {
+  color: #fff;
+  text-align: center;
+  font-weight: 300;
+}
+#oob_sli {
+  position: relative;
+  overflow: hidden;
+  margin: 0px auto 0px auto;
+  border-radius: 4px;
+  width: 630px;
+  height:270px;
+}
+
+#oob_sli ul {
+  position: relative;
+  margin: 0;
+  padding: 0;
+ 
+  height: 270px;
+  list-style: none;
+}
+
+#oob_sli ul li {
+  position: relative;
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 630px;
+  height: 270px;
+  background: #ccc;
+  text-align: center;
+  line-height: 270px;
+}
+
+.o_i {
+  width:130px;
+  height:270px;
+  position:absolute;
+  float:left;
+  z-index:1;
+  left:0px;
+  background-image: -moz-linear-gradient(270deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 1) 280% );
+background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 1) 280% );
+background-image: linear-gradient(to left, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 1) 280% );
+  opacity: 0;
+    transition: opacity .5s ease-out;
+    -moz-transition: opacity .5s ease-out;
+    -webkit-transition: opacity .5s ease-out;
+    -o-transition: opacity .5s ease-out;
+}
+.o_g {
+  width:130px;
+  height:270px;
+  position:absolute;
+  float:right;
+  right:0px;
+  z-index:1;
+  background-image: -moz-linear-gradient(270deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 1) 280% );
+background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 1) 280% );
+background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 1) 280% );
+  opacity: 0;
+    transition: opacity .5s ease-out;
+    -moz-transition: opacity .5s ease-out;
+    -webkit-transition: opacity .5s ease-out;
+    -o-transition: opacity .5s ease-out;
+  
+}
+.control_next{
+	width:130px;
+	height:33px;
+	margin-left:30px;
+	top:43%;
+    bottom:50%;
+	position:absolute;
+	background:url(http://www.mricons.com/store/png/124214_43219_128_arrow_monotone_next_right_icon.png) no-repeat;
+	background-position:50px;
+  background-size:30px 30px;
+	}
+.control_prev {
+	width:130px;
+	height:33px;
+	margin-left:-55px;
+	top:43%;
+    bottom:50%;
+	position:absolute;
+	background:url(https://cdn2.iconfinder.com/data/icons/inverticons-fill-vol-3/32/arrow_left_back_previous-128.png) no-repeat;
+	
+	background-position:70px;
+  background-size:20px 20px;
+	}
+#oob_sli:hover .o_i{
+	
+	
+  opacity: 1;
+    transition: opacity .5s ease-out;
+    -moz-transition: opacity .5s ease-out;
+    -webkit-transition: opacity .5s ease-out;
+    -o-transition: opacity .5s ease-out;
+  
+}
+#oob_sli:hover .o_g{
+	
+  opacity: 1;
+    transition: opacity .5s ease-out;
+    -moz-transition: opacity .5s ease-out;
+    -webkit-transition: opacity .5s ease-out;
+    -o-transition: opacity .5s ease-out;
+}
+</style>  
+  
+  <body>
+    <script>
+      jQuery(document).ready(function ($) {
+  
+function do_slide(){
+    interval = setInterval(function(){
+      moveRight();
+    }, 6000);
+  }
+  do_slide();
+   $('ul li').hover(function(){
+       clearInterval(interval);
+     });
+      $('ul li').mouseleave(function(){
+       do_slide();
+     });
+  
+	var slideCount = $('#oob_sli ul li').length;
+	var slideWidth = $('#oob_sli ul li').width();
+	var slideHeight = $('#oob_sli ul li').height();
+	var sliderUlWidth = slideCount * slideWidth;
+	
+  
+	$('#oob_sli').css({ width: slideWidth, height: slideHeight });
+	
+	$('#oob_sli ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
+	
+    $('#oob_sli ul li:last-child').prependTo('#oob_sli ul');
+
+    function moveLeft() {
+        $('#oob_sli ul').animate({
+            left: + slideWidth
+        }, 700, function () {
+            $('#oob_sli ul li:last-child').prependTo('#oob_sli ul');
+            $('#oob_sli ul').css('left', '');
+        });
+    };
+
+    function moveRight() {
+        $('#oob_sli ul').animate({
+            left: - slideWidth
+        }, 700, function () {
+            $('#oob_sli ul li:first-child').appendTo('#oob_sli ul');
+            $('#oob_sli ul').css('left', '');
+        });
+    };
+
+    $('a.control_prev').click(function () {
+        moveLeft();
+    });
+
+    $('a.control_next').click(function () {
+        moveRight();
+    });
+
+});    
+
+      </script>
+    <div id="oob_sli">
+  <div class="o_i">
+ 
+   <a href="#" class="control_prev"></a>
+  </div>
+  <div class="o_g">
+  <a href="#" class="control_next"></a>
+    </div>
+  <ul>
+    <li></li>
+    <li style="backgroundimage: favicon.ico;"></li>
+    <li></li>
+    <li style="background: pink;"></li>
+  </ul>  
+</div>
+    </body>
+  </html>
